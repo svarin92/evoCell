@@ -44,7 +44,7 @@ A cellular system is a population of agents that cultivate, filter, and circulat
 4. **P — Porosity**: annealed permeability profile: *how much* circulates, depending on the phase of the cycle.
 5. **T — Clock**: asynchronous *ticks* between the host engine's generations — the system lives *while* the host population waits.
 
-The unit of the host population is the complete genome (a phenotype candidate), while that of the cellular system is the fragment. The link between these two scales is not a one-to-one association between an individual and its component, but that of a flux which, at the start of each generation, fragments the whole genomes, only to retain and graft back the best-performing elements.
+The unit of the host population is the complete genome (a phenotype candidate), while that of the cellular system is the fragment. The link between these two scales is not a one-to-one association between an individual and its component, but that of a flow which, at the start of each generation, fragments the whole genomes, only to retain and graft back the best-performing elements.
 
 ### **The biological hierarchy**
 
@@ -211,4 +211,4 @@ Three arguments ground this claim:
 
 **Scope of the experimentation** — evoCell does not claim to settle a philosophical debate beyond our reach. Where the Chomskyan language-organ denotes an innate, individual module, the organ here is collective and distributed, closer to an enunciative approach of language as a shared activity. Its main contribution lies in its nature as an **executable hypothesis**: it is falsifiable within its own universe — offering a physiology that can be executed, observed, and refined.
 
-In short, this language endowed with a physiology — where cells carry the letters, tissues the domains, and organs the syntactic groups — *works*: it repairs, unblocks, and enriches. This hypothesis turned into operational code grounds a symbolic language model distinct from conventional neural approaches: regularities emerge there from a grammar and a physiology of organs, not from statistics over corpora.
+In short, this language endowed with a physiology — where cells carry the letters, tissues the domains, and organs the syntactic groups — *works*: it repairs, unblocks, and enriches. This hypothesis turned into operational code grounds a symbolic language model distinct from conventional neural approaches: regularities emerge there from a grammar and a physiology of organs, rather than from statistics based on corpora.
