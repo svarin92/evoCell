@@ -52,7 +52,7 @@ Le module épouse les quatre niveaux de l'organisation biologique, du plus simpl
 
 1. **Cellule** (`cell.go`) : un acteur portant un génome de codons, une *fitness* et un taux de mutation modulé par les signaux reçus. Totipotente par défaut ; un `Nucleus` greffable spécialise son métabolisme.
 2. **Tissu** (`space.go`) : une zone grammaticale — une population de cellules spécialisées partageant un domaine.  Il gère l'annuaire des PID des membranes, les statistiques collectives et diffuse le quorum sensing.
-3. **Organe** (`organ.go`) : une assemblée de zones liées par un **contrat fonctionnel**. Son rôle est de produire, par leur seul dialogue de quorum, un matériel génétique cohérent pour un non-terminal de rang supérieur (ex. l'organe « groupe nominal » coordonne les zones déterminant, nom et adjectif ; son indice de cohérence constitue le signal haut niveau du tissu). Les organes valident ainsi les *assemblages* : deux fragments parfaits peuvent encore former un ensemble bancal.
+3. **Organe** (`organ.go`) : une assemblée de zones liées par un **contrat fonctionnel**. Son rôle est de produire, par leur seul dialogue de quorum, un matériel génétique cohérent pour un non-terminal de rang supérieur (ex. l'organe « groupe nominal » coordonne les zones déterminant, nom et adjectif ; son indice de cohérence constitue le signal haut niveau du tissu). Les organes valident ainsi les *assemblages* : même deux fragments parfaits peuvent encore former un ensemble bancal.
 4. **Organisme** : l'individu du moteur hôte — le génome complet et son phénotype, qu'aucune couche cellulaire ne produit jamais.
 
 ### **Les acteurs supports**
@@ -191,7 +191,7 @@ ge.SearchLoop(...)
 
 ## **Licence**
 
-Distribué sous la licence MIT. Voir `LICENSE` pour les détails.
+Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour les détails.
 
 Copyright (c) 2026 Stéphane Varin. All rights reserved.
 

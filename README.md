@@ -52,7 +52,7 @@ The module embraces the four levels of biological organization, from the simples
 
 1. **Cell** (`cell.go`): an actor holding a codon genome, a *fitness*, and a mutation rate modulated by received signals. Totipotent by default; a graftable `Nucleus` specializes its metabolism.
 2. **Tissue** (`space.go`): a grammatical zone — a population of specialized cells sharing a domain. It manages the registry of membrane PIDs, the collective statistics, and diffuses quorum sensing.
-3. **Organ** (`organ.go`): an assembly of zones bound by a **functional contract**. Its role is to produce, through their quorum dialogue alone, coherent genetic material for a higher-level non-terminal (e.g. the "noun phrase" organ coordinates the determiner, noun, and adjective zones; its coherence index is the tissue's top-level signal). Organs thus validate *assemblies*: two perfect fragments may still form an ailing whole.
+3. **Organ** (`organ.go`): an assembly of zones bound by a **functional contract**. Its role is to produce, through their quorum dialogue alone, coherent genetic material for a higher-level non-terminal (e.g. the "noun phrase" organ coordinates the determiner, noun, and adjective zones; its coherence index is the tissue's top-level signal). Organs thus validate *assemblies*: even two perfect fragments may still form an ailing whole.
 4. **Organism**: the host engine's individual — the complete genome and its phenotype, which no cellular layer ever produces.
 
 ### **The supporting actors**
@@ -191,7 +191,7 @@ ge.SearchLoop(...)
 
 ## **License**
 
-Distributed under the MIT License. See `LICENSE` for details.
+Distributed under the MIT License. See [LICENSE](LICENSE) for details.
 
 Copyright (c) 2026 Stéphane Varin. All rights reserved.
 
