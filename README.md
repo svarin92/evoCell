@@ -144,14 +144,14 @@ pool.csv:  generation, zone, fragments, diversity, average donor fitness
 ## **Getting Started**
 
 ```bash
-go get github.com/svarin92/evocell
+go get github.com/svarin92/evoCell
 ```
 
 ```go
 import (
 	"github.com/svarin92/evoGo/ge"
-	"github.com/svarin92/evocell"
-	evogo "github.com/svarin92/evocell/evogo"
+	"github.com/svarin92/evoCell"
+	evogo "github.com/svarin92/evoCell/evogo"
 )
 
 cfg := evocell.Config{
