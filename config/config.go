@@ -21,19 +21,21 @@ type PorosityProfile struct {
 func LinearAnnealing(start, end float64) func(int, int) float64 {
 	return func(gen, maxGen int) float64 {
 
-	if maxGen <= 0 {
-		return start
-	}
+		if maxGen <= 0 {
+			return start
+		}
 
-	t := float64(gen) / float64(maxGen)
-	return start + (end-start)*t
+		t := float64(gen) / float64(maxGen)
+		return start + (end-start)*t
 	}
 
 }
 
 type Config struct {
+	
+	// Number of cells in the tissue.
+	Cells int  
 
-	Population int     // number of cells in the tissue
 	MaxGenerations int // for porosity annealing
 
 	// Minimum fitness required for a cell to divide.

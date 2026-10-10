@@ -72,10 +72,10 @@ type HybridizationHook interface {
 }
 ```
 
-A single line of code is enough to hybridize the module. The Genomizer does not need to be reinstantiated, since it is already integrated into the population.
+A single line of code is enough to hybridize the module. The population is created inside SearchLoop and already owns its Genomizer: the attachment therefore happens through an option, with no reinstantiation.
 
 ```go
-population.SetHybridizationHook(evogo.NewHook(cfg))
+best, err := ge.SearchLoop(..., ge.WithHybridizationHook(evogo.NewHook(cfg, obs)))
 ```
 
 Without hybridization, evoGo works like a nucleus stripped of its membrane: it never depends on evoCell. The adapter (`evogo/adapter.go`) remains the only file bridging the two worlds.
@@ -143,21 +143,22 @@ pool.csv:  generation, zone, fragments, diversity, average donor fitness
 
 ## **Getting Started**
 
-```bash
-go get github.com/svarin92/evoCell
-```
-
 ```go
 import (
+	...
 	"github.com/svarin92/evoGo/ge"
-	"github.com/svarin92/evoCell"
-	evogo "github.com/svarin92/evoCell/evogo"
+
+	"github.com/svarin92/evoCell/config"
+	"github.com/svarin92/evoCell/evogo"
+	"github.com/svarin92/evoCell/renderer"
 )
 
 cfg := evocell.Config{
-	Population:     50,
-	MaxGenerations: 100,
-	MutationBoost:   2.5,
+	Cells:             50,
+	MaxGenerations:    100,
+	MutationBoost:     2.5,
+	DivisionThreshold: 0.8,
+	DeathThreshold:    0.2,
 	Porosity: evocell.PorosityProfile{
 		StartPermeability: 0.9,  // porous: exploration
 		EndPermeability:   0.05, // sealed: exploitation
@@ -165,16 +166,18 @@ cfg := evocell.Config{
 	},
 }
 
-population, err := ge.NewPopulation(50, species)
-if err != nil {
-	// ...
-}
-
-// Hybridize the population, which owns its own Genomizer.
-population.SetHybridizationHook(evogo.NewHook(cfg))
+obs := renderer.NewObserver(cfg)
 
 // The tissue seeds itself from the population and lives between generations.
-ge.SearchLoop(...)
+bestEver, err := ge.SearchLoop(
+	100, 50, grammar, "golden",       
+	replacementFunc, selectionFunc, fitnessFunc,    
+	
+	// Hybridization through an option: the population is created inside 
+	// SearchLoop and already owns Genomizer. L'observateur feeds the 
+	// rendering (tissue.dot, pool.csv).
+	ge.WithHybridizationHook(evogo.NewHook(cfg, obs)),          
+)
 ```
 ---
 
