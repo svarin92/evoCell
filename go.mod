@@ -4,7 +4,7 @@ go 1.27.1
 
 require (
 	github.com/alecthomas/kong v1.16.1
-	github.com/svarin92/evoGo v1.1.0
+	github.com/svarin92/evoGo v1.2.1
 	github.com/vladopajic/go-actor v1.2.0
 )
 

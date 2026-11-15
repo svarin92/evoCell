@@ -3,6 +3,10 @@
 // See the LICENSE file for details.
 package config
 
+// config.go - Adjustment of the exploration-exploitation slider: the membrane 
+// is porous at the beginning (high level of exchange) and impermeable by the 
+// end.
+
 // PorosityProfile manages the membrane's opening policy over successive 
 // generations (early exploration, late exploitation).
 type PorosityProfile struct {
@@ -36,21 +40,25 @@ type Config struct {
 	// Number of cells in the tissue.
 	Cells int  
 
-	MaxGenerations int // for porosity annealing
+	// Maximum fitness for a cell to die.
+	DeathThreshold float64	
 
 	// Minimum fitness required for a cell to divide.
 	DivisionThreshold float64
 
-	// Maximum fitness for a cell to die.
-	DeathThreshold float64
+	MaxGenerations int  // for porosity annealing
 
 	// Mutation rate increase factor when a stress signal is received 
 	// (collective response).
 	MutationBoost float64
 
+	// Membrane permeability profile.
+	Porosity PorosityProfile
+
 	// Signal propagation range (0 = entire tissue).
 	QuorumRadius int
 
-	// Membrane permeability profile.
-	Porosity PorosityProfile
+	// Seed for random number generators (immunity, membranes) —
+	// injected to ensure reproducible and testable runs.
+	Seed int64
 }
