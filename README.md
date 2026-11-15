@@ -14,20 +14,21 @@ In this bio-inspired architecture, the **Membrane** is not merely a physical bar
 
 ### **Key Features**
 
-- **Stem cells and differentiation**: every `Cell` is totipotent; grafting a specialized `Nucleus` turns it into a `VowelCell`, `ConsonantCell`, `VerbCell`, `DigitCell`, `OntologyCell`... mirroring evoGo's dynamic `IOrganism` specialization mechanism.
+- **Stem cells and data-driven differentiation**: every `Cell` is totipotent. By grafting a generic `Nucleus` — configured via a `ZoneSpec` read from the symbol table of the current BNF (Backus-Naur form) grammar — it specializes for a given grammatical zone. No category is fixed a priori in the module (`VowelCell`, `ConsonantCell`, `VerbCell`... are absent from the code): changing the grammar does not require changing a single line of evoCell.
 - **Grammar zoning**: the tissue topology is derived automatically from the non-terminals of the host engine's grammar — each rule becomes a zone, each production a neighbourhood contract. The tissue orchestrates the circulation and expression of genetic fragments, while the grammar determines how these exchanges are articulated.
 - **Annealed porosity**: membranes are porous early in the cycle, favouring numerous exchanges between cells to maximize exploration. Late in the cycle, they become sealed, which stabilizes and exploits the best genomes. A single parameter drives both inter-cellular exchange and asymmetric division.
 - **Collective robustness**: if an agent mutates into a "cancerous" form, membranes learn to block its messages — a collective immune memory intervenes, like antibodies against a pathogen.
 
 ---
 
-## **Foundations and inspirations**
+## **Foundations and Inspirations**
 
 **evoCell** draws inspiration from:
 
 - **[go-actor](https://github.com/vladopajic/go-actor)**: a lightweight Go library for the Actor model, whose *mailboxes* and *workers* provide the concurrency backbone of the tissue.
 - **Horizontal Gene Transfer** and **Quorum Sensing** in microbiology: bacteria, which exchange plasmids and synchronize their behaviour through chemical signals, directly inspire the model of excretion and signalling.
 - **Stem cell biology**: asymmetric division (a stem cell producing a differentiated cell) is preferred during organogenesis over the symmetric division of mature tissues. This principle guides cell division in evoCell.
+- ***The Phenomenon of Life* by [Hans Jonas](https://www.puf.com/le-phenomene-de-la-vie-0)** (PUF): this philosophical biology founds the ontology of the evoCell module. Jonas defines the organism as the sole entity whose identity resides in a process rather than in a substance, its form persisting through the continual exchange of matter. evoCell borrows identity as a cycle rather than a content (the Harvest → Deposit → Recombine circuit is a computational reading of metabolism); the membrane as an act of delimitation constituting the self (an inside exists only by opposing a filtered outside); needful freedom, of which plasticity is the analogy (specialization is born from openness to the environment); and finally immanent teleology against imposed teleology (regularities emerge from the world's samples — they are not decreed a priori by design).
 - **[evoGo](https://github.com/svarin92/evoGo)**: the evolutionary symbolic engine this module hybridizes with, whose immune system (`IImmune`) and dynamic organism specialization (`IOrganism`) prefigured this cellular layer.
 
 ---
@@ -44,21 +45,21 @@ A cellular system is a population of agents that cultivate, filter, and circulat
 4. **P — Porosity**: annealed permeability profile: *how much* circulates, depending on the phase of the cycle.
 5. **T — Clock**: asynchronous *ticks* between the host engine's generations — the system lives *while* the host population waits.
 
-The unit of the host population is the complete genome (a phenotype candidate), while that of the cellular system is the fragment. The link between these two scales is not a one-to-one association between an individual and its component, but that of a flow which, at the start of each generation, fragments the whole genomes, only to retain and graft back the best-performing elements.
+The unit of the host population is the complete genome (a phenotype candidate), while that of the cellular system is the fragment. The link between these two scales is not a one-to-one association between an individual and its component, but that of a flux which, at the start of each generation, fragments the whole genomes, only to retain and graft back the best-performing elements.
 
 ### **The biological hierarchy**
 
 The module embraces the four levels of biological organization, from the simplest to the most complex:
 
 1. **Cell** (`cell.go`): an actor holding a codon genome, a *fitness*, and a mutation rate modulated by received signals. Totipotent by default; a graftable `Nucleus` specializes its metabolism.
-2. **Tissue** (`space.go`): a grammatical zone — a population of specialized cells sharing a domain. It manages the registry of membrane PIDs, the collective statistics, and diffuses quorum sensing.
-3. **Organ** (`organ.go`): an assembly of zones bound by a **functional contract**. Its role is to produce, through their quorum dialogue alone, coherent genetic material for a higher-level non-terminal (e.g. the "noun phrase" organ coordinates the determiner, noun, and adjective zones; its coherence index is the tissue's top-level signal). Organs thus validate *assemblies*: even two perfect fragments may still form an ailing whole.
+2. **Tissue** (`space.go`): a grammatical zone — a population of specialized cells sharing a domain. It manages the registry of membrane addresses, the collective statistics, and diffuses quorum sensing.
+3. **Organ** (`organ.go`): an assembly of zones bound by a **functional contract**. Its role is to produce, through their quorum dialogue alone, coherent genetic material for a higher-level non-terminal (e.g. the "noun phrase" organ coordinates the determiner, noun, and adjective zones; its coherence index is the tissue's top-level signal). Organs thus validate *assemblies*: even two perfect fragments may still form an incoherent whole.
 4. **Organism**: the host engine's individual — the complete genome and its phenotype, which no cellular layer ever produces.
 
 ### **The supporting actors**
 - **Membrane** (`membrane.go`): the cell's only exchange interface. It manages two mailboxes: one private for internal metabolism (cell ↔ its membrane), and one shared for the tissue's ecosystem (membrane ↔ tissue).
 - **Immune system** (`immune.go`): the security filter. It evaluates every incoming fragment in light of the memorized toxic patterns and the tissue's average *fitness*.
-- **Space** (`space.go`): the tissue's host structure. It maintains the registry of membrane PIDs, aggregates collective statistics, and orchestrates the diffusion of quorum sensing.
+- **Space** (`space.go`): the tissue's host structure. It maintains the registry of membrane addresses, aggregates collective statistics, and orchestrates the diffusion of quorum sensing.
 - **Tissue coordinator** (`tissue.go`): the *endocrine interface* between the host engine and the cells. It regulates the division policy, where the probability of asymmetric differentiation is driven by the current porosity.
 
 ### **Hybridization with evoGo**
@@ -72,7 +73,7 @@ type HybridizationHook interface {
 }
 ```
 
-A single line of code is enough to hybridize the module. The population is created inside SearchLoop and already owns its Genomizer: the attachment therefore happens through an option, with no reinstantiation.
+A single line of code is enough to hybridize the module. The population is born inside `SearchLoop` and already owns its Genomizer: the attachment therefore happens through an option, with no re-instantiation.
 
 ```go
 best, err := ge.SearchLoop(..., ge.WithHybridizationHook(evogo.NewHook(cfg, obs)))
@@ -145,24 +146,24 @@ pool.csv:  generation, zone, fragments, diversity, average donor fitness
 
 ```go
 import (
-	...
 	"github.com/svarin92/evoGo/ge"
 
 	"github.com/svarin92/evoCell/config"
-	"github.com/svarin92/evoCell/evogo"
+	evogo "github.com/svarin92/evoCell/evogo"
 	"github.com/svarin92/evoCell/renderer"
 )
 
-cfg := evocell.Config{
+// Tissue configuration.
+cfg := config.Config{
 	Cells:             50,
 	MaxGenerations:    100,
 	MutationBoost:     2.5,
 	DivisionThreshold: 0.8,
 	DeathThreshold:    0.2,
-	Porosity: evocell.PorosityProfile{
+	Porosity: config.PorosityProfile{
 		StartPermeability: 0.9,  // porous: exploration
 		EndPermeability:   0.05, // sealed: exploitation
-		Annealing:         evocell.LinearAnnealing(0.9, 0.05),
+		Annealing:         config.LinearAnnealing(0.9, 0.05),
 	},
 }
 
@@ -170,15 +171,51 @@ obs := renderer.NewObserver(cfg)
 
 // The tissue seeds itself from the population and lives between generations.
 bestEver, err := ge.SearchLoop(
-	100, 50, grammar, "golden",       
-	replacementFunc, selectionFunc, fitnessFunc,    
-	
-	// Hybridization through an option: the population is created inside 
-	// SearchLoop and already owns Genomizer. L'observateur feeds the 
-	// rendering (tissue.dot, pool.csv).
-	ge.WithHybridizationHook(evogo.NewHook(cfg, obs)),          
+	100, 50, grammar, "golden",
+	replacementFunc, selectionFunc, fitnessFunc,
+
+	// Hybridization through an option: the population is born inside
+	// SearchLoop, which already owns its own Genomizer. The observer
+	// feeds the rendering (tissue.dot, pool.csv).
+	ge.WithHybridizationHook(evogo.NewHook(cfg, obs)),
 )
 ```
+---
+
+## **Plasticity: specialization as a heuristic**
+
+The main added value of evoCell over evoGo lies in a fundamental reversal: **specialization is not a fixed taxonomy, but an emergent heuristic**.
+
+In evoGo, organisms (`IOrganism`) are predetermined: the target phenotype belongs to fixed categories (alphabetical, numeric, ontological) defined by the very structure of the engine. This is a robust model, but a rigid one. In evoCell, by contrast, the cell does not know in advance which categories it will have to handle. Non-terminal symbols are dynamic (the symbol table is rebuilt by the builder for every BNF grammar), and the grafted nucleus is a generic interpreter continuously configured by the active grammar.
+
+This mechanism induces three fundamental ruptures:
+
+- **The membrane is where discovery happens.** As the only interface with the outside world, it converts context into specialization. The host engine spots a morphological regularity among its high-performing phenotypes (for example, the pattern "golden" decomposed into root + suffix), and the differentiation signal — which carries the zone specification — re-grafts the nuclei on the fly, with no redeployment, no recompilation. Like a stem cell differentiating according to the morphogens of its environment, the symbol table acts as our morphogen.
+- **Filtering becomes a learned heuristic.** When a nucleus consults the collective immune memory through its absorption predicate, it behaves like a B lymphocyte: the memorized antibody (a winning pattern or a toxic imprint) becomes the criterion of specialization. Zones no longer filter according to arbitrary rules, but according to what has proven effective — plasticity thus becomes a memory of successes.
+- **The boundary holds by construction.** The architectural invariant is respected: the anchor (the host non-terminal or the graft address) remains anchored in the BNF, while only the filtering refinement is plastic. Moreover, the cell never manipulates the phenotype directly: discovery belongs to the host engine, while specialization takes place in the membrane. The grammar is the skeleton, and plasticity the muscle fibre around it.
+
+In practice: a cellular population can reorient itself in the middle of a run toward entirely unforeseen sub-categories (such as "suffixes", "roots", or "long vowels"), simply because the tissue observed that these classifications nourished the individuals most fragile on precisely those zones. This is the operational equivalent of biological metaplasia (where a differentiated cell re-specializes under environmental constraint): **the tissue learns its own anatomy**.
+
+### Perception: the membrane as a sensory organ
+
+Plasticity draws from two complementary sources: the **command** (the host engine identifies a regularity in the high-performing phenotypes and orders the re-graft) and **perception** — the latter being the more faithful to biological principles.
+
+A membrane does not merely execute orders; it acts as a genuine sensory organ. The tissue thus has a perception channel: the corpus of the world (a raw vocabulary such as "golden", "wooden", "goldfish", etc.) is diffused there like a morphogen gradient. Each plastic nucleus extracts regularities from it through an unsupervised heuristic. Nobody explicitly labels this data ("gold = root, en = suffix"): it is the statistical distribution that decides.
+
+The boundary is thus preserved by construction: the corpus represents the world (its morphological regularities) and not the goal (the evaluator's target never travels through this channel). The cell simply learns that "this language forms adjectives in -en", not "I must produce the word golden".
+
+### Knowledge: plasticity made exportable
+
+The heuristic thus acquired is not an opaque parameter buried in the system: it is **first-class data**. Every emergent profile is captured during the harvests (via a defensive snapshot through a mailbox, preserving the integrity of living nuclei), aggregated per zone, then exported into a `profiles.csv` file (in an explicit form such as: *"zone string_tail discovered suffix:en, support 0.42"*).
+
+This file is both directly readable by a human and consumable by the host engine, which can thus enrich its own pattern library from the tissue's discoveries.
+
+This is why plasticity here goes beyond a mere adaptation mechanism to become the sine qua non of a self-learning system. A system with a fixed specialization can optimize itself, but it cannot learn. evoCell brings together the three pillars of authentic learning:
+- Specialization *encodes* discovered regularities.
+- Knowledge is *inspectable and exportable*.
+- It *acts in return* — filtering modifies what the zone retains, which enriches the harvest delivered to the genomes, transforming in depth the trajectory of the individuals.
+
+**The tissue does not merely adapt: it produces morphological knowledge.**
 ---
 
 ## **Roadmap**
@@ -206,12 +243,12 @@ Copyright (c) 2026 Stéphane Varin. All rights reserved.
 
 Three arguments ground this claim:
 
-- **A strictly biological definition of the organ.** Function precedes structure (the contract): an organ is not a cell type, but a functional commitment binding differentiated tissues. These tissues keep their domains (the zones) — populations of specialized cells sharing a grammatical territory. The assembly is validated in an emergent manner: the zone filters locally, the organ judges the whole — for the association of a perfect determiner fragment and a perfect noun fragment may form an ailing noun phrase. Finally, the coherence index is the organ's own vital sign. Every biological property has its formal homologue here; the correspondence is **operational, not purely metaphorical**.
+- **A strictly biological definition of the organ.** Function precedes structure (the contract): an organ is not a cell type, but a functional commitment binding differentiated tissues. These tissues keep their domains (the zones) — populations of specialized cells sharing a grammatical territory. The assembly is validated in an emergent manner: the zone filters locally, the organ judges the whole — for the association of a perfect determiner fragment and a perfect noun fragment may still form an ailing noun phrase. Finally, the coherence index is the organ's own vital sign. Every biological property has its formal homologue here; the correspondence is **operational, not purely metaphorical**.
 
 - **A complete hierarchy.** From the sequence of elements to the global entity: fragment → cell → tissue → organ → organism. Language appears as the binding of the intermediate levels: cells "know" letters, zones "know" domains, organs "know" syntactic groups. The sentence emerges only from their coordination, never from an isolated level. This is a **causal dynamics of coupling**, not a mere theoretical classification.
 
-- **An internal empirical validation.** When the host organism (the GE population) stagnates on a fitness plateau, it is the activity of the organs — through coordinated GN/GV grafts — that restarts the dynamics. Within the closed world of the system, the thesis of a language operating as a physiology of organs produces measurable effects: it acts as a **verifiable optimization heuristic**, endowed with its own resolving power.
+- **An internal empirical validation.** When the host organism (the GE population) stagnates on a fitness plateau, it is the activity of the organs — through coordinated NP/VP grafts — that restarts the dynamics. Within the closed world of the system, the thesis of a language operating as a physiology of organs produces measurable effects: it acts as a **verifiable optimization heuristic**, endowed with its own resolving power.
 
 **Scope of the experimentation** — evoCell does not claim to settle a philosophical debate beyond our reach. Where the Chomskyan language-organ denotes an innate, individual module, the organ here is collective and distributed, closer to an enunciative approach of language as a shared activity. Its main contribution lies in its nature as an **executable hypothesis**: it is falsifiable within its own universe — offering a physiology that can be executed, observed, and refined.
 
-In short, this language endowed with a physiology — where cells carry the letters, tissues the domains, and organs the syntactic groups — *works*: it repairs, unblocks, and enriches. This hypothesis turned into operational code grounds a symbolic language model distinct from conventional neural approaches: regularities emerge there from a grammar and a physiology of organs, rather than from statistics based on corpora.
+In short, this language endowed with a physiology — where cells carry the letters, tissues the domains, and organs the syntactic groups — *works*: it repairs, unblocks, and enriches. This hypothesis turned into operational code grounds a symbolic language model distinct from conventional neural approaches: regularities emerge there from a grammar and a physiology of organs, not from statistics over corpora.
