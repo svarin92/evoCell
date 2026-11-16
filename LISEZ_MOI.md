@@ -81,7 +81,7 @@ best, err := ge.SearchLoop(..., ge.WithHybridizationHook(evogo.NewHook(cfg, obs)
 
 Sans hybridation, evoGo fonctionne comme un noyau dépourvu de membrane : il ne dépend jamais d'evoCell. L'adaptateur (`evogo/adapter.go`) reste le seul fichier à assurer le pont entre les deux mondes.
 
-### **Cycle de vie du tissu**
+### **Le cycle de vie du tissu**
 
 Le coordinateur et l'observateur génèrent des traces explicites entre deux générations d'evoGo. À partir de la grammaire `letter.bnf` et pour la cible `"golden"`, le déroulement d'un cycle pourrait produire la séquence suivante :
 
@@ -213,7 +213,7 @@ C'est pourquoi la plasticité dépasse ici le simple mécanisme d'adaptation pou
 - L'encodage : la spécialisation fixe les régularités découvertes.
 - L'explicitation : la connaissance est lisible, inspectable et exportable.
 - La rétroaction : le filtrage redéfinit ce que la zone retient, infléchissant en retour la trajectoire des individus.
-*Le tissu ne se contente pas de s'adapter : il produit de la connaissance morphologique.*
+
 ---
 
 ## **Feuille de route**
@@ -249,4 +249,4 @@ Trois arguments fondent cette affirmation :
 
 **Portée de l'expérimentation** — evoCell ne prétend pas trancher un débat philosophique hors de notre portée. Là où le langage-organe chomskyen désigne un module inné et individuel, l'organe est ici collectif et distribué, plus proche d'une approche énonciative du langage comme activité partagée. Son apport principal réside dans sa nature d'**hypothèse exécutable** : elle est falsifiable au sein de son propre univers — offrant une physiologie que l'on peut exécuter, observer et raffiner.
 
-En somme, ce langage doté d'une physiologie — où les cellules portent les lettres, les tissus les domaines et les organes les groupes syntaxiques — *fonctionne* : il répare, débloque et enrichit. Cette hypothèse transformée en code opérationnel fonde un modèle de langage symbolique distinct des approches neuronales conventionnelles : les régularités y émergent d'une grammaire et d'une physiologie d'organes, et non de statistiques sur corpus.
+En somme, ce langage doté d'une physiologie — où les cellules portent les lettres, les tissus les domaines et les organes les groupes syntaxiques — *fonctionne* : il répare, débloque et enrichit. Cette hypothèse, transformée en code opérationnel, fonde un modèle de langage symbolique distinct des approches neuronales conventionnelles : les régularités y émergent d'une grammaire et d'une physiologie d'organes, et non de corpus statistiques.

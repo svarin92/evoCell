@@ -14,7 +14,7 @@ In this bio-inspired architecture, the **Membrane** is not merely a physical bar
 
 ### **Key Features**
 
-- **Stem cells and data-driven differentiation**: every `Cell` is totipotent. By grafting a generic `Nucleus` — configured via a `ZoneSpec` read from the symbol table of the current BNF (Backus-Naur form) grammar — it specializes for a given grammatical zone. No category is fixed a priori in the module (`VowelCell`, `ConsonantCell`, or again `VerbCell` are absent from the code): changing the grammar does not require changing a single line of evoCell.
+- **Stem cells and data-driven differentiation**: every `Cell` is totipotent. By grafting a generic `Nucleus` — configured via a `ZoneSpec` read from the symbol table of the current BNF (Backus-Naur form) grammar — it specializes for a given grammatical zone. No category is fixed *a priori* in the module (`VowelCell`, `ConsonantCell`, or again `VerbCell` are absent from the code): changing the grammar does not require changing a single line of evoCell.
 - **Grammar zoning**: the tissue topology is derived automatically from the non-terminals of the host engine's grammar — each rule becomes a zone, each production a neighbourhood contract. The tissue orchestrates the circulation and expression of genetic fragments, while the grammar determines how these exchanges are articulated.
 - **Annealed porosity**: membranes are porous early in the cycle, favouring numerous exchanges between cells to maximize exploration. Late in the cycle, they become sealed, which stabilizes and exploits the best genomes. A single parameter drives both inter-cellular exchange and asymmetric division.
 - **Collective robustness**: if an agent mutates into a "cancerous" form, membranes learn to block its messages — a collective immune memory intervenes, like antibodies against a pathogen.
@@ -28,7 +28,7 @@ In this bio-inspired architecture, the **Membrane** is not merely a physical bar
 - **[go-actor](https://github.com/vladopajic/go-actor)**: a lightweight Go library for the Actor model, whose *mailboxes* and *workers* provide the concurrency backbone of the tissue.
 - **Horizontal Gene Transfer** and **Quorum Sensing** in microbiology: bacteria, which exchange plasmids and synchronize their behaviour through chemical signals, directly inspire the model of excretion and signalling.
 - **Stem cell biology**: asymmetric division (a stem cell producing a differentiated cell) is preferred during organogenesis over the symmetric division of mature tissues. This principle guides cell division in evoCell.
-- ***The Phenomenon of Life* by [Hans Jonas](https://www.puf.com/le-phenomene-de-la-vie-0)** (PUF): Hans Jonas's organic philosophy directly irrigates evoCell's ontology. For Jonas, the organism is an exception: its true identity resides in a process rather than in a fixed substance, its form persisting at the very heart of the ceaseless exchanges of matter. evoCell borrows identity as a cycle rather than a content (the Harvest → Deposit → Recombine circuit offers a computational translation of metabolism); the membrane as an act of delimitation constitutes the self (an inside exists only by opposing a filtered outside); needful freedom and immanent teleology: just as openness to the environment engenders specialization in the living (emergent plasticity), evoCell's regularities emerge from the world's samples rather than being decreed a priori.
+- ***The Phenomenon of Life* by [Hans Jonas](https://www.puf.com/le-phenomene-de-la-vie-0)** (PUF): Hans Jonas's organic philosophy directly irrigates evoCell's ontology. For Jonas, the organism is an exception: its true identity resides in a process rather than in a fixed substance, its form persisting at the very heart of the ceaseless exchanges of matter. evoCell borrows identity as a cycle rather than a content (the Harvest → Deposit → Recombine circuit offers a computational translation of metabolism); the membrane as an act of delimitation constitutes the self (an inside exists only by opposing a filtered outside); needy freedom and immanent teleology: just as openness to the environment engenders specialization in the living (emergent plasticity), evoCell's regularities emerge from the world's samples instead of being decreed *a priori*.
 - **[evoGo](https://github.com/svarin92/evoGo)**: the evolutionary symbolic engine this module hybridizes with, whose immune system (`IImmune`) and dynamic organism specialization (`IOrganism`) prefigured this cellular layer.
 
 ---
@@ -214,7 +214,6 @@ This is why plasticity here goes beyond a mere adaptation mechanism to establish
 - Explication: knowledge is readable, inspectable, and exportable.
 - Feedback: filtering redefines what the zone retains, in return bending the trajectory of the individuals.
 
-*The tissue does not merely adapt: it produces morphological knowledge.*
 ---
 
 ## **Roadmap**
@@ -250,4 +249,4 @@ Three arguments ground this claim:
 
 **Scope of the experimentation** — evoCell does not claim to settle a philosophical debate beyond our reach. Where the Chomskyan language-organ denotes an innate, individual module, the organ here is collective and distributed, closer to an enunciative approach of language as a shared activity. Its main contribution lies in its nature as an **executable hypothesis**: it is falsifiable within its own universe — offering a physiology that can be executed, observed, and refined.
 
-In short, this language endowed with a physiology — where cells carry the letters, tissues the domains, and organs the syntactic groups — *works*: it repairs, unblocks, and enriches. This hypothesis turned into operational code grounds a symbolic language model distinct from conventional neural approaches: regularities emerge there from a grammar and a physiology of organs, not from statistics over corpora.
+In short, this language endowed with a physiology — where cells carry the letters, tissues the domains, and organs the syntactic groups — *works*: it repairs, unblocks, and enriches. This hypothesis,  transformed into an operational code, establishes a model of symbolic language distinct from conventional neural approaches: regularities emerge there from a grammar and a physiology of organs, not from corpus statistics.
