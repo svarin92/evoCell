@@ -14,7 +14,7 @@ Dans cette architecture bio-inspirée, la **Membrane** n'est pas une simple barr
 
 ### **Caractéristiques principales**
 
-- **Cellules souches et différenciation par donnée** : chaque `Cell` est totipotente. Par la greffe d'un `Nucleus` générique - configuré via une `ZoneSpec` lue dans la table des symboles de la grammaire BNF (Backus-Naur form) courante -, elle se spécialise pour une zone grammaticale donnée. Aucune catégorie n'est figée a priori dans le module (`VowelCell`, `ConsonantCell`, `VerbCell` ... sont absentes du code) : modifier la grammaire ne requiert pas de modifier une seule ligne d'evoCell.
+- **Cellules souches et différenciation par donnée** : chaque `Cell` est totipotente. Par la greffe d'un `Nucleus` générique - configuré via une `ZoneSpec` lue dans la table des symboles de la grammaire BNF (Backus-Naur form) courante -, elle se spécialise pour une zone grammaticale donnée. Aucune catégorie n'est figée a priori dans le module (`VowelCell`, `ConsonantCell`, ou encore `VerbCell` sont absentes du code) : modifier la grammaire ne requiert pas de modifier une seule ligne d'evoCell.
 - **Zonage grammatical** : la topologie du tissu est déduite automatiquement des non-terminaux de la grammaire du moteur hôte — chaque règle devient une zone, chaque production un contrat de voisinage. Le tissu orchestre la circulation et l'expression des fragments génétiques, tandis que la grammaire détermine la façon dont ces échanges s'articulent.
 - **Porosité de recuit** (annealing) : les membranes sont poreuses en début de cycle, favorisant de nombreux échanges entre cellules pour maximiser l'exploration. En fin de cycle, elles deviennent étanches, ce qui permet de stabiliser et d'exploiter les meilleurs génomes. Un seul paramètre pilote à la fois les échanges inter-cellulaires et la division asymétrique.
 - **Robustesse collective** : si un agent mute vers une forme « cancéreuse », les membranes apprennent à bloquer ses messages — une mémoire immunitaire collective intervient à la manière des anticorps contre un pathogène.
@@ -28,7 +28,7 @@ Dans cette architecture bio-inspirée, la **Membrane** n'est pas une simple barr
 - **[go-actor](https://github.com/vladopajic/go-actor)** : une bibliothèque Go légère pour le modèle d'acteurs, dont les *mailboxes* et les *workers* fournissent l'ossature concurrente du tissu.
 - **Le transfert horizontal de gènes** et le **quorum sensing** en microbiologie : les bactéries, qui échangent des plasmides et synchronisent leur comportement via des signaux chimiques, inspirent directement le modèle de l'excrétion et de la signalisation.
 - **La biologie des cellules souches** : la division asymétrique (production d'une cellule différenciée à partir d'une cellule souche) est préférée lors de l'organogenèse, à la division symétrique des tissus matures. Ce principe guide la division cellulaire dans evoCell.
-- ***Le Phénomène de la vie* de [Hans Jonas](https://www.puf.com/le-phenomene-de-la-vie-0)** (PUF) : cette biologie philosophique fonde l'ontologie du module evoCell. Jonas définit l'organisme comme la seule entité dont l'identité réside dans un processus et non dans une substance : sa forme persiste dans l'échange continuel de la matière. evoCell en emprunte l'identité comme cycle et non comme contenu (le circuit Harvest → Deposit → Recombine est une lecture computationnelle du métabolisme) ; la membrane comme acte de délimitation constituant le soi (un dedans n'existe qu'en s'opposant à un dehors filtré) ; la liberté nécessiteuse, dont la plasticité est l'analogie (la spécialisation naît de l'ouverture au milieu) ; enfin la téléologie immanente contre la téléologie imposée (les régularités émergent des échantillons du monde, elles ne sont pas décrétées a priori par le concept).
+- ***Le Phénomène de la vie* de [Hans Jonas](https://www.puf.com/le-phenomene-de-la-vie-0)** (PUF) : La philosophie organique de Hans Jonas irrigue directement l'ontologie d'evoCell. Pour Jonas, l'organisme est une exception : sa véritable identité réside dans un processus plutôt que dans une substance figée, sa forme persistant au cœur même des échanges incessants de matière. evoCell en emprunte l'identité comme cycle et non comme contenu (le circuit Harvest → Deposit → Recombine offre une traduction computationnelle du métabolisme) ; la membrane comme acte de délimitation constitue le soi (un dedans n'existe qu'en s'opposant à un dehors filtré) ; la liberté nécessiteuse et la téléologie immanente : de même que l'ouverture au milieu engendre la spécialisation chez le vivant (plasticité émergente), les régularités d'evoCell émergent des échantillons du monde plutôt que d'être décrétées a priori.
 - **[evoGo](https://github.com/svarin92/evoGo)** : le moteur évolutif symbolique avec lequel ce module s'hybride, dont le système immunitaire (`IImmune`) et la spécialisation dynamique des organismes (`IOrganism`) préfiguraient cette couche cellulaire.
 
 ---
@@ -43,7 +43,7 @@ Un système cellulaire est une population d'agents qui cultivent, filtrent et fo
 2. **M — Membranes** : interfaces de communication (excrétion, absorption, signalisation) qui régissent *comment* circulent les fragments.
 3. **I — Immunité** : mémoire des motifs toxiques et verdicts Soi/non-Soi qui définissent *quels* fragments sont refusés.
 4. **P — Porosité** : profil de perméabilité recuit qui fixe *combien* de fragments circulent selon la phase du cycle.
-5. **T — Horloge** : les *ticks* asynchrones entre les générations du moteur hôte — le système vit *pendant* que la population hôte attend.
+5. **T(ick) — Horloge** : les *ticks* asynchrones entre les générations du moteur hôte — le système vit *pendant* que la population hôte attend.
 
 L'unité de la population hôte est le génome complet (un candidat phénotype), tandis que celle du système cellulaire est le fragment. Le lien entre ces deux échelles n'est pas une association terme à terme entre un individu et sa composante, mais celui d'un flux qui, au début de chaque génération, fragmente les génomes entiers, pour ne retenir et greffer en retour que les éléments les plus performants.
 
@@ -79,11 +79,11 @@ Une seule ligne de code suffit à hybrider le module. La population naît à l'i
 best, err := ge.SearchLoop(..., ge.WithHybridizationHook(evogo.NewHook(cfg, obs)))
 ```
 
-Sans hybridation, evoGo fonctionne comme un noyau dépouvu de membrane : il ne dépend jamais d'evoCell. L'adaptateur (`evogo/adapter.go`) reste le seul fichier à faire le pont entre les deux mondes.
+Sans hybridation, evoGo fonctionne comme un noyau dépourvu de membrane : il ne dépend jamais d'evoCell. L'adaptateur (`evogo/adapter.go`) reste le seul fichier à assurer le pont entre les deux mondes.
 
 ### **Cycle de vie du tissu**
 
-Le coordinateur et l'observateur génèrent des traces explicites entre deux générations d'evoGo. À partir de la grammaire `letter.bnf` et pour la cible `"golden"`, le déroulement d'un cycle peut produire la séquence suivante :
+Le coordinateur et l'observateur génèrent des traces explicites entre deux générations d'evoGo. À partir de la grammaire `letter.bnf` et pour la cible `"golden"`, le déroulement d'un cycle pourrait produire la séquence suivante :
 
 **Semis — `OnGenerationStart(1)`** : les 60 génomes GE sont décomposés en fragments et semés dans les zones déduites des non-terminaux de la grammaire :
 
@@ -184,38 +184,37 @@ bestEver, err := ge.SearchLoop(
 
 ## **Plasticité : la spécialisation comme heuristique**
 
-La principale valeur ajoutée d'evoCell par rapport à evoGo réside dans un renversement fondamental : **la spécialisation n'est pas une taxonomie figée, mais une heuristique émergente**.
+L'évolution de l'architecture entre les deux moteurs traduit un changement de paradigme fondamental dans la manière de concevoir le traitement des formes et des symboles : **la spécialisation n'est pas une taxonomie figée, mais une heuristique émergente**.
 
-Dans evoGo, les organismes (`IOrganism`) sont prédéterminés : le phénotype cible appartient à des catégories fixes (alphabétique, numérique, ontologique) définies par la structure même du moteur. C'est un modèle robuste, mais rigide. Dans evoCell, en revanche, la cellule ignore à l'avance les catégories qu'elle devra traiter. Les symboles non-terminaux sont dynamiques (la table des symboles est reconstruite par le builder à chaque grammaire BNF), et le noyau greffé est un interprète générique configuré en continu par la grammaire active.
+Dans evoGo, les organismes (`IOrganism`) sont prédéterminés : le phénotype cible appartient à des catégories fixes (alphabétique, numérique, ontologique) ancrées dans la structure du moteur. C'est un modèle robuste, mais rigide. Dans evoCell, au contraire, la cellule ignore à l'avance les catégories qu'elle devra traiter. Les symboles non-terminaux sont dynamiques (la table des symboles grammaticaux est reconstruite à la volée par le `builder`), et le noyau greffé interprète en continu la grammaire active.
 
-Ce mécanisme induit trois ruptures fondamentales :
+Ce mécanisme induit deux ruptures fondamentales :
 
-- **La membrane est le lieu de la découverte.** En tant que seule interface avec l'extérieur, elle convertit le contexte en spécialisation. Le moteur hôte repère une régularité morphologique parmi ses phénotypes performants (par exemple, le motif « golden » décomposé en racine + suffixe), et le signal de différenciation — qui porte la spécification de la zone — regreffe les noyaux à la volée, sans redéploiement ni recompilation. À l'image d'une cellule souche qui se différencie selon les morphogènes de son environnement, la table des symboles fait office de morphogène.
-- **Le filtrage devient une heuristique apprise.** Lorsqu'un noyau consulte la mémoire immunitaire collective via son prédicat d'absorption, il se comporte comme un lymphocyte B : l'anticorps mémorisé (un motif gagnant ou une empreinte toxique) devient le critère de spécialisation. Les zones ne filtrent plus selon des règles arbitraires, mais selon ce qui a prouvé son efficacité — la plasticité devient ainsi une mémoire des succès.
-- **La frontière est tenue par construction.** L'invariant architectural est respecté : l'ancrage (le non-terminal hôte ou l'adresse de greffe) demeure ancré dans la BNF, tandis que seul le raffinement du filtrage est plastique. De plus, la cellule ne manipule jamais directement le phénotype : la découverte appartient au moteur hôte, tandis que la spécialisation s'opère dans la membrane. La grammaire constitue l'ossature, et la plasticité la fibre musculaire.
+- **La membrane est le lieu de la découverte.** Seule interface avec l'extérieur, elle convertit le contexte en spécialisation. Le moteur hôte repère une régularité morphologique parmi ses phénotypes performants — tel le motif « golden » décomposé en racine et en suffixe. Le signal de différenciation transmet alors sa spécification et regreffe les noyaux à la volée, s'affranchissant de toute recompilation. À l'image d'une cellule souche qui se spécialise sous l'effet des morphogènes de son milieu, le système trouve ici son équivalent : la table des symboles fait office de morphogène.
+- **Le filtrage est une heuristique.** Lorsqu'un noyau consulte la mémoire immunitaire collective via son prédicat d'absorption, il opère comme un lymphocyte B : l'anticorps mémorisé — motif gagnant ou empreinte toxique — oriente sa spécialisation. Les zones ne filtrent plus selon des règles arbitraires, mais selon ce que l'expérience a déjà éprouvé. En capitalisant sur ses succès passés, la plasticité du système se fait moteur de découverte.
 
-En pratique : une population cellulaire peut se réorienter en plein milieu d'un « run » vers des sous-catégories totalement imprévues (telles que « suffixes », « racines » ou « voyelles longues »), simplement parce que le tissu a observé que ces classifications nourrissaient les individus les plus fragiles sur ces zones. C'est l'équivalent opérationnel de la métaplasie biologique (où une cellule différenciée se re-spécialise sous contrainte environnementale) : **le tissu apprend sa propre anatomie**.
+En pratique : une population cellulaire peut se réorienter en cours de cycle vers des sous-catégories totalement imprévues (telles que « suffixes », « racines » ou « voyelles longues »), dès lors que le tissu constate que ces classifications nourrissent les individus les plus vulnérables. C'est l'équivalent opérationnel de la métaplasie biologique — ce processus où une cellule différenciée se re-spécialise sous la contrainte de son environnement. Par ce mécanisme, *le tissu apprend sa propre anatomie*. 
 
 ### La perception : la membrane comme organe sensoriel
 
-La plasticité puise dans deux sources complémentaires : la **commande** (le moteur hôte identifie une régularité dans les phénotypes performants et ordonne la regreffe) et la **perception** — cette dernière étant la plus fidèle aux principes biologiques.
+La plasticité puise à deux sources complémentaires : la commande (le moteur hôte identifie une régularité et ordonne la regreffe) et la perception — cette dernière renouant plus fidèlement avec la logique du vivant.
 
-Une membrane ne se contente pas d'exécuter des ordres ; elle agit comme un véritable organe sensoriel. Le tissu dispose ainsi d'un canal perceptif : le corpus du monde (un vocabulaire brut comme `golden`, `wooden`, `goldfish`, etc.) y est diffusé tel un gradient de morphogène. Chaque noyau plastique en extrait des régularités par heuristique non supervisée. Personne n'étiquette explicitement ces données (« gold = racine, en = suffixe ») : c'est la distribution statistique qui décide.
+Car la membrane ne se réduit pas à une simple interface passive : elle agit comme un véritable organe sensoriel. Le tissu dispose ainsi d'un canal perceptif où le corpus brut (`golden`, `wooden`, `goldfish`, etc.) se diffuse à la manière d'un gradient de morphogène. Chaque noyau plastique y extrait des régularités par une heuristique non supervisée. Nulle étiquette n'est ici apposée (« ceci est une racine, cela un suffixe ») : c'est la seule distribution statistique qui en décide.
 
-La frontière est ainsi préservée par construction : le corpus représente le monde (ses régularités morphologiques) et non le but (la cible de l'évaluateur ne transite jamais par ce canal). La cellule apprend simplement que « ce langage forme des adjectifs en -en », et non « je dois produire le mot golden ».
+La frontière architecturale demeure ainsi inviolée. Le corpus transmet au système les structures du monde — ses récurrences morphologiques —, et non son but final (la cible de l'évaluateur ne transite jamais par ce canal). La cellule apprend simplement à décoder les régularités du langage, et non à imiter un résultat prédéterminé.
 
-### La connaissance : la plasticité rendue exportable
+### La connaissance comme fruit de la plasticité
 
-L'heuristique ainsi acquise n'est pas un paramètre opaque enfoui dans le système : c'est une **donnée de premier rang**. Chaque profil émergent est capturé lors des récoltes (via un snapshot défensif par mailbox, préservant l'intégrité des noyaux vivants), agrégé par zone, puis exporté dans un fichier `profiles.csv` (sous une forme explicite du type : *« la zone string_tail a découvert suffixe:en, support 0.42 »*).
+L'heuristique ainsi forgée n'est pas un paramètre opaque enfoui dans les rouages du système : elle devient une donnée de premier rang. Capturés au fil des récoltes — par des mécanismes de capture préservant l'intégrité des noyaux vivants —, les profils émergents sont agrégés par zone puis externalisés.
 
-Ce fichier est à la fois directement lisible par un humain et consommable par le moteur hôte, qui peut ainsi enrichir sa propre bibliothèque de patterns à partir des découvertes du tissu.
+Ce matériau s'avère à la fois lisible par l'humain et consommable par le moteur hôte, qui peut ainsi enrichir sa propre bibliothèque de motifs à partir des découvertes du tissu.
 
-C'est pourquoi la plasticité dépasse ici le simple mécanisme d'adaptation pour devenir la condition sine qua non d'un système auto-apprenant. Un système à spécialisation figée peut s'optimiser, mais il ne peut pas apprendre. evoCell réunit les trois piliers de l'apprentissage authentique :
-- La spécialisation *encode* des régularités découvertes. 
-- La connaissance est *inspectable et exportable*.
-- Elle *agit en retour* — le filtrage modifie ce que la zone retient, ce qui enrichit la récolte transmise aux génomes, transformant en profondeur la trajectoire des individus.
+C'est pourquoi la plasticité dépasse ici le simple mécanisme d'adaptation pour s'ériger en condition de l'auto-apprentissage. Un système à spécialisation figée peut s'optimiser, mais il ne peut pas apprendre. evoCell réunit les trois piliers d'une véritable cognition évolutive :
+- L'encodage : la spécialisation fixe les régularités découvertes.
+- L'explicitation : la connaissance est lisible, inspectable et exportable.
+- La rétroaction : le filtrage redéfinit ce que la zone retient, infléchissant en retour la trajectoire des individus.
 
-**Le tissu ne se contente pas de s'adapter : il produit de la connaissance morphologique.**
+*Le tissu ne se contente pas de s'adapter : il produit de la connaissance morphologique.*
 ---
 
 ## **Feuille de route**

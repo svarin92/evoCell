@@ -14,7 +14,7 @@ In this bio-inspired architecture, the **Membrane** is not merely a physical bar
 
 ### **Key Features**
 
-- **Stem cells and data-driven differentiation**: every `Cell` is totipotent. By grafting a generic `Nucleus` — configured via a `ZoneSpec` read from the symbol table of the current BNF (Backus-Naur form) grammar — it specializes for a given grammatical zone. No category is fixed a priori in the module (`VowelCell`, `ConsonantCell`, `VerbCell`... are absent from the code): changing the grammar does not require changing a single line of evoCell.
+- **Stem cells and data-driven differentiation**: every `Cell` is totipotent. By grafting a generic `Nucleus` — configured via a `ZoneSpec` read from the symbol table of the current BNF (Backus-Naur form) grammar — it specializes for a given grammatical zone. No category is fixed a priori in the module (`VowelCell`, `ConsonantCell`, or again `VerbCell` are absent from the code): changing the grammar does not require changing a single line of evoCell.
 - **Grammar zoning**: the tissue topology is derived automatically from the non-terminals of the host engine's grammar — each rule becomes a zone, each production a neighbourhood contract. The tissue orchestrates the circulation and expression of genetic fragments, while the grammar determines how these exchanges are articulated.
 - **Annealed porosity**: membranes are porous early in the cycle, favouring numerous exchanges between cells to maximize exploration. Late in the cycle, they become sealed, which stabilizes and exploits the best genomes. A single parameter drives both inter-cellular exchange and asymmetric division.
 - **Collective robustness**: if an agent mutates into a "cancerous" form, membranes learn to block its messages — a collective immune memory intervenes, like antibodies against a pathogen.
@@ -28,7 +28,7 @@ In this bio-inspired architecture, the **Membrane** is not merely a physical bar
 - **[go-actor](https://github.com/vladopajic/go-actor)**: a lightweight Go library for the Actor model, whose *mailboxes* and *workers* provide the concurrency backbone of the tissue.
 - **Horizontal Gene Transfer** and **Quorum Sensing** in microbiology: bacteria, which exchange plasmids and synchronize their behaviour through chemical signals, directly inspire the model of excretion and signalling.
 - **Stem cell biology**: asymmetric division (a stem cell producing a differentiated cell) is preferred during organogenesis over the symmetric division of mature tissues. This principle guides cell division in evoCell.
-- ***The Phenomenon of Life* by [Hans Jonas](https://www.puf.com/le-phenomene-de-la-vie-0)** (PUF): this philosophical biology founds the ontology of the evoCell module. Jonas defines the organism as the sole entity whose identity resides in a process rather than in a substance, its form persisting through the continual exchange of matter. evoCell borrows identity as a cycle rather than a content (the Harvest → Deposit → Recombine circuit is a computational reading of metabolism); the membrane as an act of delimitation constituting the self (an inside exists only by opposing a filtered outside); needful freedom, of which plasticity is the analogy (specialization is born from openness to the environment); and finally immanent teleology against imposed teleology (regularities emerge from the world's samples — they are not decreed a priori by design).
+- ***The Phenomenon of Life* by [Hans Jonas](https://www.puf.com/le-phenomene-de-la-vie-0)** (PUF): Hans Jonas's organic philosophy directly irrigates evoCell's ontology. For Jonas, the organism is an exception: its true identity resides in a process rather than in a fixed substance, its form persisting at the very heart of the ceaseless exchanges of matter. evoCell borrows identity as a cycle rather than a content (the Harvest → Deposit → Recombine circuit offers a computational translation of metabolism); the membrane as an act of delimitation constitutes the self (an inside exists only by opposing a filtered outside); needful freedom and immanent teleology: just as openness to the environment engenders specialization in the living (emergent plasticity), evoCell's regularities emerge from the world's samples rather than being decreed a priori.
 - **[evoGo](https://github.com/svarin92/evoGo)**: the evolutionary symbolic engine this module hybridizes with, whose immune system (`IImmune`) and dynamic organism specialization (`IOrganism`) prefigured this cellular layer.
 
 ---
@@ -43,7 +43,7 @@ A cellular system is a population of agents that cultivate, filter, and circulat
 2. **M — Membranes**: communication interfaces (excretion, absorption, signalling): *how* fragments circulate.
 3. **I — Immunity**: toxic-pattern memory and self/non-self verdicts: *which* fragments are refused.
 4. **P — Porosity**: annealed permeability profile: *how much* circulates, depending on the phase of the cycle.
-5. **T — Clock**: asynchronous *ticks* between the host engine's generations — the system lives *while* the host population waits.
+5. **T(ick) — Clock**: asynchronous *ticks* between the host engine's generations — the system lives *while* the host population waits.
 
 The unit of the host population is the complete genome (a phenotype candidate), while that of the cellular system is the fragment. The link between these two scales is not a one-to-one association between an individual and its component, but that of a flux which, at the start of each generation, fragments the whole genomes, only to retain and graft back the best-performing elements.
 
@@ -79,11 +79,11 @@ A single line of code is enough to hybridize the module. The population is born 
 best, err := ge.SearchLoop(..., ge.WithHybridizationHook(evogo.NewHook(cfg, obs)))
 ```
 
-Without hybridization, evoGo works like a nucleus stripped of its membrane: it never depends on evoCell. The adapter (`evogo/adapter.go`) remains the only file bridging the two worlds.
+Without hybridization, evoGo works like a nucleus stripped of its membrane: it never depends on evoCell. The adapter (`evogo/adapter.go`) remains the only file to ensure the bridge between the two worlds.
 
 ### **The tissue life cycle**
 
-The coordinator and the observer generate explicit traces between two generations of evoGo. Starting from the `letter.bnf` grammar and for the target `"golden"`, the unfolding of a cycle can produce the following sequence:
+The coordinator and the observer generate explicit traces between two generations of evoGo. Starting from the `letter.bnf` grammar and for the target `"golden"`, the unfolding of a cycle could produce the following sequence:
 
 **Seeding — `OnGenerationStart(1)`**: the 60 GE genomes are disassembled into fragments and sown into the zones derived from the grammar's non-terminals:
 
@@ -184,38 +184,37 @@ bestEver, err := ge.SearchLoop(
 
 ## **Plasticity: specialization as a heuristic**
 
-The main added value of evoCell over evoGo lies in a fundamental reversal: **specialization is not a fixed taxonomy, but an emergent heuristic**.
+The evolution of the architecture between the two engines reflects a fundamental paradigm shift in the way the processing of forms and symbols is conceived: **specialization is not a fixed taxonomy, but an emergent heuristic**.
 
-In evoGo, organisms (`IOrganism`) are predetermined: the target phenotype belongs to fixed categories (alphabetical, numeric, ontological) defined by the very structure of the engine. This is a robust model, but a rigid one. In evoCell, by contrast, the cell does not know in advance which categories it will have to handle. Non-terminal symbols are dynamic (the symbol table is rebuilt by the builder for every BNF grammar), and the grafted nucleus is a generic interpreter continuously configured by the active grammar.
+In evoGo, organisms (`IOrganism`) are predetermined: the target phenotype belongs to fixed categories (alphabetical, numeric, ontological) anchored in the structure of the engine. This is a robust model, but a rigid one. In evoCell, on the contrary, the cell does not know in advance which categories it will have to handle. Non-terminal symbols are dynamic (the table of grammatical symbols is rebuilt on the fly by the `builder`), and the grafted nucleus continuously interprets the active grammar.
 
-This mechanism induces three fundamental ruptures:
+This mechanism induces two fundamental ruptures:
 
-- **The membrane is where discovery happens.** As the only interface with the outside world, it converts context into specialization. The host engine spots a morphological regularity among its high-performing phenotypes (for example, the pattern "golden" decomposed into root + suffix), and the differentiation signal — which carries the zone specification — re-grafts the nuclei on the fly, with no redeployment, no recompilation. Like a stem cell differentiating according to the morphogens of its environment, the symbol table acts as our morphogen.
-- **Filtering becomes a learned heuristic.** When a nucleus consults the collective immune memory through its absorption predicate, it behaves like a B lymphocyte: the memorized antibody (a winning pattern or a toxic imprint) becomes the criterion of specialization. Zones no longer filter according to arbitrary rules, but according to what has proven effective — plasticity thus becomes a memory of successes.
-- **The boundary holds by construction.** The architectural invariant is respected: the anchor (the host non-terminal or the graft address) remains anchored in the BNF, while only the filtering refinement is plastic. Moreover, the cell never manipulates the phenotype directly: discovery belongs to the host engine, while specialization takes place in the membrane. The grammar is the skeleton, and plasticity the muscle fibre around it.
+- **The membrane is where discovery happens.** The only interface with the outside world, it converts context into specialization. The host engine spots a morphological regularity among its high-performing phenotypes — such as the pattern "golden" decomposed into root and suffix. The differentiation signal then transmits its specification and re-grafts the nuclei on the fly, dispensing with any recompilation. Like a stem cell specializing under the effect of the morphogens of its environment, the system finds its equivalent here: the symbol table acts as a morphogen.
+- **Filtering is a heuristic.** When a nucleus consults the collective immune memory through its absorption predicate, it operates like a B lymphocyte: the memorized antibody — a winning pattern or a toxic imprint — steers its specialization. Zones no longer filter according to arbitrary rules, but according to what experience has already put to the test. By capitalizing on its past successes, the system's plasticity becomes an engine of discovery.
 
-In practice: a cellular population can reorient itself in the middle of a run toward entirely unforeseen sub-categories (such as "suffixes", "roots", or "long vowels"), simply because the tissue observed that these classifications nourished the individuals most fragile on precisely those zones. This is the operational equivalent of biological metaplasia (where a differentiated cell re-specializes under environmental constraint): **the tissue learns its own anatomy**.
+In practice: a cellular population can reorient itself during a cycle toward entirely unforeseen sub-categories (such as "suffixes", "roots", or "long vowels"), as soon as the tissue observes that these classifications nourish the most vulnerable individuals. This is the operational equivalent of biological metaplasia — the process by which a differentiated cell re-specializes under the constraint of its environment. Through this mechanism, *the tissue learns its own anatomy*.
 
 ### Perception: the membrane as a sensory organ
 
-Plasticity draws from two complementary sources: the **command** (the host engine identifies a regularity in the high-performing phenotypes and orders the re-graft) and **perception** — the latter being the more faithful to biological principles.
+Plasticity draws on two complementary sources: the command (the host engine identifies a regularity and orders the re-graft) and perception — the latter renewing more faithfully with the logic of the living.
 
-A membrane does not merely execute orders; it acts as a genuine sensory organ. The tissue thus has a perception channel: the corpus of the world (a raw vocabulary such as "golden", "wooden", "goldfish", etc.) is diffused there like a morphogen gradient. Each plastic nucleus extracts regularities from it through an unsupervised heuristic. Nobody explicitly labels this data ("gold = root, en = suffix"): it is the statistical distribution that decides.
+For the membrane is not reduced to a mere passive interface: it acts as a genuine sensory organ. The tissue thus has a perception channel where the raw corpus (`golden`, `wooden`, `goldfish`, etc.) diffuses like a morphogen gradient. Every plastic nucleus extracts regularities from it through an unsupervised heuristic. No label is ever applied here ("this is a root, that a suffix"): it is the statistical distribution alone that decides.
 
-The boundary is thus preserved by construction: the corpus represents the world (its morphological regularities) and not the goal (the evaluator's target never travels through this channel). The cell simply learns that "this language forms adjectives in -en", not "I must produce the word golden".
+The architectural boundary thus remains inviolate. The corpus transmits to the system the structures of the world — its morphological recurrences — not its final goal (the evaluator's target never travels through this channel). The cell simply learns to decode the regularities of the language, not to imitate a predetermined result.
 
-### Knowledge: plasticity made exportable
+### Knowledge as the fruit of plasticity
 
-The heuristic thus acquired is not an opaque parameter buried in the system: it is **first-class data**. Every emergent profile is captured during the harvests (via a defensive snapshot through a mailbox, preserving the integrity of living nuclei), aggregated per zone, then exported into a `profiles.csv` file (in an explicit form such as: *"zone string_tail discovered suffix:en, support 0.42"*).
+The heuristic thus forged is not an opaque parameter buried in the workings of the system: it becomes first-class data. Captured along the harvests — through capture mechanisms that preserve the integrity of living nuclei — the emergent profiles are aggregated per zone and then externalized.
 
-This file is both directly readable by a human and consumable by the host engine, which can thus enrich its own pattern library from the tissue's discoveries.
+This material proves both readable by a human and consumable by the host engine, which can thus enrich its own pattern library from the tissue's discoveries.
 
-This is why plasticity here goes beyond a mere adaptation mechanism to become the sine qua non of a self-learning system. A system with a fixed specialization can optimize itself, but it cannot learn. evoCell brings together the three pillars of authentic learning:
-- Specialization *encodes* discovered regularities.
-- Knowledge is *inspectable and exportable*.
-- It *acts in return* — filtering modifies what the zone retains, which enriches the harvest delivered to the genomes, transforming in depth the trajectory of the individuals.
+This is why plasticity here goes beyond a mere adaptation mechanism to establish itself as the very condition of self-learning. A system with a fixed specialization can optimize itself, but it cannot learn. evoCell brings together the three pillars of a genuine evolutionary cognition:
+- Encoding: specialization fixes the regularities it has discovered.
+- Explication: knowledge is readable, inspectable, and exportable.
+- Feedback: filtering redefines what the zone retains, in return bending the trajectory of the individuals.
 
-**The tissue does not merely adapt: it produces morphological knowledge.**
+*The tissue does not merely adapt: it produces morphological knowledge.*
 ---
 
 ## **Roadmap**
