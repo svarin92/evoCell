@@ -14,7 +14,7 @@ Dans cette architecture bio-inspirée, la **Membrane** n'est pas une simple barr
 
 ### **Caractéristiques principales**
 
-- **Cellules souches et différenciation par donnée** : chaque `Cell` est totipotente. Par la greffe d'un `Nucleus` générique - configuré via une `ZoneSpec` lue dans la table des symboles de la grammaire BNF (Backus-Naur form) courante -, elle se spécialise pour une zone grammaticale donnée. Aucune catégorie n'est figée a priori dans le module (`VowelCell`, `ConsonantCell`, ou encore `VerbCell` sont absentes du code) : modifier la grammaire ne requiert pas de modifier une seule ligne d'evoCell.
+- **Cellules souches et différenciation par donnée** : chaque `Cell` est totipotente. Par la greffe d'un `Nucleus` générique - configuré via une `ZoneSpec` lue dans la table des symboles de la grammaire BNF (Backus-Naur form) courante -, elle se spécialise pour une zone grammaticale donnée. Aucune catégorie n'est figée *a priori* dans le module (`VowelCell`, `ConsonantCell`, ou encore `VerbCell` sont absentes du code) : modifier la grammaire ne requiert pas de modifier une seule ligne d'evoCell.
 - **Zonage grammatical** : la topologie du tissu est déduite automatiquement des non-terminaux de la grammaire du moteur hôte — chaque règle devient une zone, chaque production un contrat de voisinage. Le tissu orchestre la circulation et l'expression des fragments génétiques, tandis que la grammaire détermine la façon dont ces échanges s'articulent.
 - **Porosité de recuit** (annealing) : les membranes sont poreuses en début de cycle, favorisant de nombreux échanges entre cellules pour maximiser l'exploration. En fin de cycle, elles deviennent étanches, ce qui permet de stabiliser et d'exploiter les meilleurs génomes. Un seul paramètre pilote à la fois les échanges inter-cellulaires et la division asymétrique.
 - **Robustesse collective** : si un agent mute vers une forme « cancéreuse », les membranes apprennent à bloquer ses messages — une mémoire immunitaire collective intervient à la manière des anticorps contre un pathogène.
@@ -28,7 +28,7 @@ Dans cette architecture bio-inspirée, la **Membrane** n'est pas une simple barr
 - **[go-actor](https://github.com/vladopajic/go-actor)** : une bibliothèque Go légère pour le modèle d'acteurs, dont les *mailboxes* et les *workers* fournissent l'ossature concurrente du tissu.
 - **Le transfert horizontal de gènes** et le **quorum sensing** en microbiologie : les bactéries, qui échangent des plasmides et synchronisent leur comportement via des signaux chimiques, inspirent directement le modèle de l'excrétion et de la signalisation.
 - **La biologie des cellules souches** : la division asymétrique (production d'une cellule différenciée à partir d'une cellule souche) est préférée lors de l'organogenèse, à la division symétrique des tissus matures. Ce principe guide la division cellulaire dans evoCell.
-- ***Le Phénomène de la vie* de [Hans Jonas](https://www.puf.com/le-phenomene-de-la-vie-0)** (PUF) : La philosophie organique de Hans Jonas irrigue directement l'ontologie d'evoCell. Pour Jonas, l'organisme est une exception : sa véritable identité réside dans un processus plutôt que dans une substance figée, sa forme persistant au cœur même des échanges incessants de matière. evoCell en emprunte l'identité comme cycle et non comme contenu (le circuit Harvest → Deposit → Recombine offre une traduction computationnelle du métabolisme) ; la membrane comme acte de délimitation constitue le soi (un dedans n'existe qu'en s'opposant à un dehors filtré) ; la liberté nécessiteuse et la téléologie immanente : de même que l'ouverture au milieu engendre la spécialisation chez le vivant (plasticité émergente), les régularités d'evoCell émergent des échantillons du monde plutôt que d'être décrétées a priori.
+- ***Le Phénomène de la vie* de [Hans Jonas](https://www.puf.com/le-phenomene-de-la-vie-0)** (PUF) : La philosophie organique de Hans Jonas irrigue directement l'ontologie d'evoCell. Pour Jonas, l'organisme est une exception : sa véritable identité réside dans un processus plutôt que dans une substance figée, sa forme persistant au cœur même des échanges incessants de matière. evoCell en emprunte l'identité comme cycle et non comme contenu (le circuit Harvest → Deposit → Recombine offre une traduction computationnelle du métabolisme) ; la membrane comme acte de délimitation constitue le soi (un dedans n'existe qu'en s'opposant à un dehors filtré) ; la liberté nécessiteuse et la téléologie immanente : de même que l'ouverture au milieu engendre la spécialisation chez le vivant (plasticité émergente), les régularités d'evoCell émergent des échantillons du monde au lieu d'être décrétées *a priori*.
 - **[evoGo](https://github.com/svarin92/evoGo)** : le moteur évolutif symbolique avec lequel ce module s'hybride, dont le système immunitaire (`IImmune`) et la spécialisation dynamique des organismes (`IOrganism`) préfiguraient cette couche cellulaire.
 
 ---
@@ -52,14 +52,14 @@ L'unité de la population hôte est le génome complet (un candidat phénotype),
 Le module épouse les quatre niveaux de l'organisation biologique, du plus simple au plus complexe :
 
 1. **Cellule** (`cell.go`) : un acteur portant un génome de codons, une *fitness* et un taux de mutation modulé par les signaux reçus. Totipotente par défaut ; un `Nucleus` greffable spécialise son métabolisme.
-2. **Tissu** (`space.go`) : une zone grammaticale — une population de cellules spécialisées partageant un domaine. Il gère l'annuaire des adresses des membranes, les statistiques collectives et diffuse le quorum sensing.
-3. **Organe** (`organ.go`) : une assemblée de zones liées par un **contrat fonctionnel**. Son rôle est de produire, par leur seul dialogue de quorum, un matériel génétique cohérent pour un non-terminal de rang supérieur (ex. l'organe « groupe nominal » coordonne les zones déterminant, nom et adjectif ; son indice de cohérence constitue le signal haut niveau du tissu). Les organes valident ainsi les *assemblages* : même deux fragments parfaits peuvent encore former un ensemble incohérent.
+2. **Tissu** (`space.go`) : une zone grammaticale — une population de cellules spécialisées partageant un domaine. Il gère l'annuaire des adresses de membranes, les statistiques collectives et diffuse le quorum sensing.
+3. **Organe** (`organ.go`) : une assemblée de zones liées par un **contrat fonctionnel**. Son rôle est de produire, par leur seul dialogue de quorum, un matériel génétique cohérent pour un non-terminal de rang supérieur (ex. l'organe « groupe nominal » coordonne les zones déterminant, nom et adjectif ; son indice de cohérence constitue le signal de haut niveau du tissu). Les organes valident ainsi les *assemblages* : même deux fragments parfaits peuvent encore former un ensemble incohérent.
 4. **Organisme** : l'individu du moteur hôte — le génome complet et son phénotype, qu'aucune couche cellulaire ne produit jamais.
 
 ### **Les acteurs supports**
 - **Membrane** (`membrane.go`) : l'unique interface d'échange de la cellule. Elle gère deux boîtes de réception (mailboxes) : une privée pour le métabolisme interne (cellule ↔ sa membrane) et une partagée pour l'écosystème du tissu (membrane ↔ tissu).
 - **Système immunitaire** (`immune.go`) : le filtre de sécurité. Il évalue chaque fragment entrant à la lumière des motifs toxiques mémorisés et de la *fitness* moyenne du tissu.
-- **Space** (`space.go`) : la structure d'accueil du tissu. Il maintient l'annuaire des adresses des membranes, agrège les statistiques collectives et orchestre la diffusion du quorum sensing.
+- **Space** (`space.go`) : la structure d'accueil du tissu. Il maintient l'annuaire des adresses de membranes, agrège les statistiques collectives et orchestre la diffusion du quorum sensing.
 - **Coordinateur du tissu** (`tissue.go`) : l'interface *endocrinienne* entre le moteur hôte et les cellules. Il régule la politique de division, où la probabilité de différenciation asymétrique est pilotée par la porosité courante.
 
 ### **Hybridation avec evoGo**
@@ -199,7 +199,7 @@ En pratique : une population cellulaire peut se réorienter en cours de cycle ve
 
 La plasticité puise à deux sources complémentaires : la commande (le moteur hôte identifie une régularité et ordonne la regreffe) et la perception — cette dernière renouant plus fidèlement avec la logique du vivant.
 
-Car la membrane ne se réduit pas à une simple interface passive : elle agit comme un véritable organe sensoriel. Le tissu dispose ainsi d'un canal perceptif où le corpus brut (`golden`, `wooden`, `goldfish`, etc.) se diffuse à la manière d'un gradient de morphogène. Chaque noyau plastique y extrait des régularités par une heuristique non supervisée. Nulle étiquette n'est ici apposée (« ceci est une racine, cela un suffixe ») : c'est la seule distribution statistique qui en décide.
+Car la membrane ne se réduit pas à une simple interface passive : elle agit comme un véritable organe sensoriel. Le tissu dispose ainsi d'un canal perceptif où le corpus brut (`golden`, `wooden`, `goldfish`, etc.) se diffuse à la manière d'un gradient de morphogène. Chaque noyau plastique y extrait des régularités par une heuristique non supervisée. Nulle étiquette n'est ici apposée (« ceci est une racine, cela un suffixe ») : c'est la distribution statistique qui en décide seule.
 
 La frontière architecturale demeure ainsi inviolée. Le corpus transmet au système les structures du monde — ses récurrences morphologiques —, et non son but final (la cible de l'évaluateur ne transite jamais par ce canal). La cellule apprend simplement à décoder les régularités du langage, et non à imiter un résultat prédéterminé.
 
@@ -213,7 +213,6 @@ C'est pourquoi la plasticité dépasse ici le simple mécanisme d'adaptation pou
 - L'encodage : la spécialisation fixe les régularités découvertes.
 - L'explicitation : la connaissance est lisible, inspectable et exportable.
 - La rétroaction : le filtrage redéfinit ce que la zone retient, infléchissant en retour la trajectoire des individus.
-
 *Le tissu ne se contente pas de s'adapter : il produit de la connaissance morphologique.*
 ---
 
